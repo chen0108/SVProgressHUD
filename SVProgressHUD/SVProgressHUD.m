@@ -723,10 +723,17 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
     
     // Calculate available height for display
     CGFloat activeHeight = CGRectGetHeight(orientationFrame);
-    if(keyboardHeight > 0) {
-        activeHeight += CGRectGetHeight(statusBarFrame) * 2;
+//    if(keyboardHeight > 0) {
+//        activeHeight += CGRectGetHeight(statusBarFrame) * 2;
+//    }
+//    activeHeight -= keyboardHeight;
+    if (keyboardHeight > 0) {
+        CGFloat offY = activeHeight*0.55-self.hudView.bounds.size.height/2 - keyboardHeight - 10;
+        if (offY < 0) {
+            
+            activeHeight += offY * 2;
+        }
     }
-    activeHeight -= keyboardHeight;
     
     CGFloat posX = CGRectGetMidX(orientationFrame);
     CGFloat posY = floorf(activeHeight*0.45f);
